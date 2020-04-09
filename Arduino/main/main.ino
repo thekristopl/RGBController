@@ -32,10 +32,16 @@ class RedGreenBlue
     analogWrite(bluePin, b);
   }
 
+  void turnOff()
+  {
+    this->setColor(0,0,0);
+  }
+
 };
 
 RedGreenBlue rgb[2] = {RedGreenBlue(11, 9, 10),  RedGreenBlue(6, 3, 5)};
- 
+String d;
+
 void setup()
 {
   Serial.begin(9600);
@@ -46,17 +52,26 @@ void loop()
 {
   if (Serial.available())
   {
-      String d;
       d = Serial.readStringUntil('\n');
 
-
-      if(d[1] == '#') //np: 0#A018CF
+      if(d=="START")
+      {
+        Serial.println("START_");
+        rgb[0].setColor(255,255,255);
+        rgb[1].setColor(255,255,255);
+      }
+      else if(d == "STOP")
+      {
+        Serial.println("STOP_");
+        rgb[0].turnOff();
+        rgb[1].turnOff();
+      }
+      if(d[1] == '#')
       {
          rgb[d[0]-'0'].setColor(hex(d[2], d[3]), hex(d[4], d[5]), hex(d[6], d[7]));
-         Serial.println(hex(d[2], d[3]));
-         Serial.println(hex(d[4], d[5]));
-         Serial.println(hex(d[6], d[7]));
       }
+      
+      
   }
   
 

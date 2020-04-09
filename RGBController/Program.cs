@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ledControl
+namespace RGBController
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace ledControl
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Window());
+            Application.Run(new Main());
         }
     }
 }
