@@ -63,9 +63,9 @@ namespace RGBController.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sharp_close_black_48dp {
+        internal static System.Drawing.Bitmap pc {
             get {
-                object obj = ResourceManager.GetObject("sharp_close_black_48dp", resourceCulture);
+                object obj = ResourceManager.GetObject("pc", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,49 @@ namespace RGBController.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sharp_settings_black_48dp {
+        internal static System.Drawing.Bitmap pc_white {
             get {
-                object obj = ResourceManager.GetObject("sharp_settings_black_48dp", resourceCulture);
+                object obj = ResourceManager.GetObject("pc_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap settings {
+            get {
+                object obj = ResourceManager.GetObject("settings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap settings_white {
+            get {
+                object obj = ResourceManager.GetObject("settings_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap x {
+            get {
+                object obj = ResourceManager.GetObject("x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap x_white {
+            get {
+                object obj = ResourceManager.GetObject("x_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

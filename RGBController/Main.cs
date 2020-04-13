@@ -20,18 +20,20 @@ namespace RGBController
         public Main()
         {
             InitializeComponent();
-        }
+            Background.Controls.Add(PC);
+            Background.Controls.Add(SettingsButton);
+            Background.Controls.Add(MinimalizeButton);
 
 
-        private void Main_Load(object sender, EventArgs e)
-        {
+
+
             if (!Arduino.Conect(S.Default.DefaultPort))
             {
                 Settings settings_form = new Settings();
                 settings_form.ShowDialog();
             }
-            
         }
+
 
         private void SettingsButton_Click(object sender, EventArgs e)
         {
@@ -65,5 +67,24 @@ namespace RGBController
         {
             mouseDown = false;
         }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Arduino.Disconnect();
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static String Hex(System.Drawing.Color c)
+        {
+            return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Arduino.Send("FADE");
+        }
+
+
+
     }
 }

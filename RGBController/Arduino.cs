@@ -27,7 +27,7 @@ namespace RGBController
         public static bool Conect(string _port)
         { 
             port = new SerialPort(_port, 9600, Parity.None, 8, StopBits.One);
-            port.ReadTimeout = 3000;
+            port.ReadTimeout = 10000;
 
             try
             {
@@ -38,6 +38,7 @@ namespace RGBController
             catch (TimeoutException)
             {
                 MessageBox.Show("Connection timeout in port " + _port);
+                port.Close();
                 return false;
             }
             catch (UnauthorizedAccessException)
@@ -57,6 +58,8 @@ namespace RGBController
 
         public static bool Disconnect()
         {
+            if (!isConnected) return false;
+            
             port.Write("STOP");
             try
             {

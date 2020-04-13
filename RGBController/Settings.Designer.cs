@@ -32,7 +32,7 @@
             this.ConnectGroup = new System.Windows.Forms.GroupBox();
             this.ConnectionButton = new System.Windows.Forms.Button();
             this.Ports = new System.Windows.Forms.ComboBox();
-            this.AcceptButton = new System.Windows.Forms.Button();
+            this.Accept = new System.Windows.Forms.Button();
             this.ConnectGroup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,23 +65,22 @@
             this.Ports.Size = new System.Drawing.Size(188, 21);
             this.Ports.TabIndex = 0;
             // 
-            // AcceptButton
+            // Accept
             // 
-            this.AcceptButton.Location = new System.Drawing.Point(137, 105);
-            this.AcceptButton.Name = "AcceptButton";
-            this.AcceptButton.Size = new System.Drawing.Size(75, 23);
-            this.AcceptButton.TabIndex = 7;
-            this.AcceptButton.Text = "OK";
-            this.AcceptButton.UseVisualStyleBackColor = true;
-            this.AcceptButton.Click += new System.EventHandler(this.Acceept_Click);
+            this.Accept.Location = new System.Drawing.Point(137, 105);
+            this.Accept.Name = "Accept";
+            this.Accept.Size = new System.Drawing.Size(75, 23);
+            this.Accept.TabIndex = 7;
+            this.Accept.Text = "OK";
+            this.Accept.UseVisualStyleBackColor = true;
+            this.Accept.Click += new System.EventHandler(this.Acceept_Click);
             // 
             // Settings
             // 
-            this.AcceptButton = this.AcceptButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(224, 138);
-            this.Controls.Add(this.AcceptButton);
+            this.Controls.Add(this.Accept);
             this.Controls.Add(this.ConnectGroup);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -102,6 +101,6 @@
         public System.Windows.Forms.GroupBox ConnectGroup;
         public System.Windows.Forms.Button ConnectionButton;
         public System.Windows.Forms.ComboBox Ports;
-        private System.Windows.Forms.Button AcceptButton;
+        private System.Windows.Forms.Button Accept;
     }
 }
