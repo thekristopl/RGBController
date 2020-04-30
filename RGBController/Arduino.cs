@@ -32,8 +32,11 @@ namespace RGBController
             try
             {
                 port.Open();
-                port.Write("START");
-                if (!port.ReadLine().Contains("START_")) return false;
+                Send("STAR", null);
+
+                string read = port.ReadLine();
+                //MessageBox.Show(read);
+                if (!read.Contains("STA_")) return false;
             }
             catch (TimeoutException)
             {
@@ -51,19 +54,43 @@ namespace RGBController
             return true;
         }
 
-        public static void Send(string line)
+        public static void Send(string header, List<byte> options)
         {
-            if (isConnected) port.Write(line);
+            if (header == null) return;
+
+            if (options == null)
+            {
+                byte[] head = Encoding.ASCII.GetBytes(header + (char)0);
+                port.Write(head, 0, head.Length);
+
+                string m = "";
+                foreach (byte h in head) m += h.ToString() + " ";
+                //MessageBox.Show(m);
+            }
+            else
+            {
+                byte[] head = Encoding.ASCII.GetBytes(header + (char)options.Count);
+                port.Write(head, 0, head.Length);
+                port.Write(options.ToArray(), 0, options.Count);
+
+                string m = "";
+                foreach (byte h in head) m += h.ToString() + " ";
+                foreach (byte o in options.ToArray()) m += o.ToString() + " ";
+                //MessageBox.Show(m);
+            }
+
         }
 
         public static bool Disconnect()
         {
             if (!isConnected) return false;
             
-            port.Write("STOP");
+            Send("STOP", null);
             try
             {
-                if (!port.ReadLine().Contains("STOP_")) return false;
+                string read = port.ReadLine();
+                //MessageBox.Show(read);
+                if (!read.Contains("STO_")) return false;
             }
             catch (TimeoutException)
             {

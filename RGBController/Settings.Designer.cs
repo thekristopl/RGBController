@@ -33,6 +33,7 @@
             this.ConnectionButton = new System.Windows.Forms.Button();
             this.Ports = new System.Windows.Forms.ComboBox();
             this.Accept = new System.Windows.Forms.Button();
+            this.AutorunCheckBox = new System.Windows.Forms.CheckBox();
             this.ConnectGroup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +68,7 @@
             // 
             // Accept
             // 
-            this.Accept.Location = new System.Drawing.Point(137, 105);
+            this.Accept.Location = new System.Drawing.Point(137, 144);
             this.Accept.Name = "Accept";
             this.Accept.Size = new System.Drawing.Size(75, 23);
             this.Accept.TabIndex = 7;
@@ -75,24 +76,38 @@
             this.Accept.UseVisualStyleBackColor = true;
             this.Accept.Click += new System.EventHandler(this.Acceept_Click);
             // 
+            // AutorunCheckBox
+            // 
+            this.AutorunCheckBox.AutoSize = true;
+            this.AutorunCheckBox.Location = new System.Drawing.Point(12, 105);
+            this.AutorunCheckBox.Name = "AutorunCheckBox";
+            this.AutorunCheckBox.Size = new System.Drawing.Size(63, 17);
+            this.AutorunCheckBox.TabIndex = 8;
+            this.AutorunCheckBox.Text = "Autorun";
+            this.AutorunCheckBox.UseVisualStyleBackColor = true;
+            this.AutorunCheckBox.CheckedChanged += new System.EventHandler(this.IsAutorun_CheckedChanged);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 138);
+            this.ClientSize = new System.Drawing.Size(224, 179);
+            this.Controls.Add(this.AutorunCheckBox);
             this.Controls.Add(this.Accept);
             this.Controls.Add(this.ConnectGroup);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Settings";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Settings_FormClosed);
             this.ConnectGroup.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -102,5 +117,6 @@
         public System.Windows.Forms.Button ConnectionButton;
         public System.Windows.Forms.ComboBox Ports;
         private System.Windows.Forms.Button Accept;
+        private System.Windows.Forms.CheckBox AutorunCheckBox;
     }
 }

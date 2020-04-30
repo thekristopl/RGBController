@@ -34,5 +34,29 @@ namespace RGBController.Properties {
                 this["DefaultPort"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int Speed {
+            get {
+                return ((int)(this["Speed"]));
+            }
+            set {
+                this["Speed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255")]
+        public int Brightness {
+            get {
+                return ((int)(this["Brightness"]));
+            }
+            set {
+                this["Brightness"] = value;
+            }
+        }
     }
 }

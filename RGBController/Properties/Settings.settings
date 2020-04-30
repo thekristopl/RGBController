@@ -5,5 +5,11 @@
     <Setting Name="DefaultPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">COM3</Value>
     </Setting>
+    <Setting Name="Speed" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="Brightness" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">255</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

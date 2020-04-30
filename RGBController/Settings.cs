@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using S = RGBController.Properties.Settings;
+using Microsoft.Win32;
 
 namespace RGBController
 {
@@ -19,11 +20,12 @@ namespace RGBController
             InitializeComponent();
             StatusChange();
 
-            
         }
 
         private void StatusChange()
         {
+            AutorunCheckBox.Checked = IsAutorun();
+
             if(Arduino.IsConnected())
             {
                 ConnectGroup.Text = "Connected";
@@ -87,6 +89,28 @@ namespace RGBController
         private void Settings_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (!Arduino.IsConnected()) Application.Exit();
+        }
+
+        private bool IsAutorun()
+        {
+            RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+            if (rkApp.GetValue(RGBController.Properties.Resources.AppName) == null) return false;
+            else return true;
+        }
+
+        private void IsAutorun_CheckedChanged(object sender, EventArgs e)
+        {
+            if(!AutorunCheckBox.Checked)
+            {
+                RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                rkApp.DeleteValue(RGBController.Properties.Resources.AppName, false);
+            }
+            else
+            {
+                RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                rkApp.SetValue(RGBController.Properties.Resources.AppName, Application.ExecutablePath.ToString());
+            }
         }
     }
 }

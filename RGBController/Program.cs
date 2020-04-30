@@ -3,20 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using S = RGBController.Properties.Settings;
 
 namespace RGBController
 {
     static class Program
     {
-        /// <summary>
-        /// Główny punkt wejścia dla aplikacji.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+
+
+
+            if (!Arduino.Conect(S.Default.DefaultPort))
+            {
+                Settings settings_form = new Settings();
+                settings_form.ShowDialog();
+            }
+            Application.Run(new Window());
+            
+
+
+            RGBController.Properties.Settings.Default.Save();
+            Arduino.Disconnect();
         }
+
+
     }
 }
