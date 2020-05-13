@@ -119,6 +119,9 @@
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -128,7 +131,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="RGBController_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -137,14 +139,8 @@
     <None Include="Resources\settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\colors.png" />
-    <Content Include="Resources\wheel.png" />
-    <Content Include="Resources\wheel2.png" />
     <Content Include="RGB_Circle.ico" />
-    <None Include="Resources\settings_white.ico" />
-    <None Include="Resources\settings_white.png" />
     <Content Include="Resources\color_wheel.png" />
-    <Content Include="Resources\pc.png" />
     <Content Include="Resources\RGB_Circle.ico" />
     <Content Include="Resources\settings.ico" />
   </ItemGroup>

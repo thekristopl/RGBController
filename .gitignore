@@ -1,0 +1,12 @@
+.vs
+/RGBController/bin/Debug/RGBController.exe.manifest
+/RGBController/bin/Debug/RGBController.pdb
+/RGBController/bin/Debug/app.publish
+/RGBController/bin/Debug/RGBController.application
+/RGBController/bin/Debug/RGBController.exe.config
+/RGBController/bin/Release/RGBController.exe.config
+/RGBController/bin/Release/RGBController.pdb
+/RGBController/bin/Release/RGBController.exe
+bin
+obj
+/.editorconfig

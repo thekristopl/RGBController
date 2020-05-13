@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.IO;
 using S = RGBController.Properties.Settings;
 
 namespace RGBController
@@ -25,7 +26,7 @@ namespace RGBController
         }
 
         public static bool Conect(string _port)
-        { 
+        {
             port = new SerialPort(_port, 9600, Parity.None, 8, StopBits.One);
             port.ReadTimeout = 10000;
 
@@ -47,6 +48,11 @@ namespace RGBController
             catch (UnauthorizedAccessException)
             {
                 MessageBox.Show("Access denied in port " + _port);
+                return false;
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Port " + _port + " does not exist.");
                 return false;
             }
             //MessageBox.Show("Connected succesfully in port " + _port);
