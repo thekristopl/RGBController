@@ -37,25 +37,61 @@ namespace RGBController.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
-        public int Speed {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte lampBright {
             get {
-                return ((int)(this["Speed"]));
+                return ((byte)(this["lampBright"]));
             }
             set {
-                this["Speed"] = value;
+                this["lampBright"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("255")]
-        public int Brightness {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte yellowBright {
             get {
-                return ((int)(this["Brightness"]));
+                return ((byte)(this["yellowBright"]));
             }
             set {
-                this["Brightness"] = value;
+                this["yellowBright"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte blueBright {
+            get {
+                return ((byte)(this["blueBright"]));
+            }
+            set {
+                this["blueBright"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte rgbBright {
+            get {
+                return ((byte)(this["rgbBright"]));
+            }
+            set {
+                this["rgbBright"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color rgbColor {
+            get {
+                return ((global::System.Drawing.Color)(this["rgbColor"]));
+            }
+            set {
+                this["rgbColor"] = value;
             }
         }
     }

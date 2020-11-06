@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using System.IO;
 using S = RGBController.Properties.Settings;
+using System.Security.Cryptography;
 
 namespace RGBController
 {
@@ -28,16 +29,16 @@ namespace RGBController
         public static bool Conect(string _port)
         {
             port = new SerialPort(_port, 9600, Parity.None, 8, StopBits.One);
-            port.ReadTimeout = 10000;
+            port.ReadTimeout = 5000;
 
             try
             {
                 port.Open();
-                Send("STAR", null);
+                Send(1, null);
 
-                string read = port.ReadLine();
-                //MessageBox.Show(read);
-                if (!read.Contains("STA_")) return false;
+                byte[] read = { 0 };
+                port.Read(read, 0, 1);
+                if (read[0] != 1) return false;
             }
             catch (TimeoutException)
             {
@@ -55,48 +56,55 @@ namespace RGBController
                 MessageBox.Show("Port " + _port + " does not exist.");
                 return false;
             }
-            //MessageBox.Show("Connected succesfully in port " + _port);
+            //MessageBox1.Show("Connected succesfully in port " + _port);
             isConnected = true;
             return true;
         }
 
-        public static void Send(string header, List<byte> options)
+        public static void Send(byte header, byte[] options)
         {
-            if (header == null) return;
+            int len;
+            if (options == null) len = 0;
+            else len = (byte)options.Length;
 
-            if (options == null)
+            byte[] toSend = new byte[2 + len];
+
+            toSend[0] = header;
+            toSend[1] = (byte)len;
+
+            for(int i = 0; i < len; i++)
             {
-                byte[] head = Encoding.ASCII.GetBytes(header + (char)0);
-                port.Write(head, 0, head.Length);
-
-                string m = "";
-                foreach (byte h in head) m += h.ToString() + " ";
-                //MessageBox.Show(m);
-            }
-            else
-            {
-                byte[] head = Encoding.ASCII.GetBytes(header + (char)options.Count);
-                port.Write(head, 0, head.Length);
-                port.Write(options.ToArray(), 0, options.Count);
-
-                string m = "";
-                foreach (byte h in head) m += h.ToString() + " ";
-                foreach (byte o in options.ToArray()) m += o.ToString() + " ";
-                //MessageBox.Show(m);
+                toSend[i + 2] = options[i];
             }
 
+            string a = "";
+            foreach (byte b in toSend) a += b.ToString() + " ";
+            //MessageBox.Show(a);
+
+
+            port.Write(toSend, 0, len + 2);
         }
+
+        public static byte[] Read(int bytesToRead)
+        {
+            if(!isConnected) return null;
+
+            byte[] buffer = new byte[bytesToRead];
+            port.Read(buffer, 0, bytesToRead);
+            return buffer;
+        }
+
 
         public static bool Disconnect()
         {
             if (!isConnected) return false;
             
-            Send("STOP", null);
+            Send(0, null);
             try
             {
-                string read = port.ReadLine();
-                //MessageBox.Show(read);
-                if (!read.Contains("STO_")) return false;
+                byte[] read = { 0 };
+                port.Read(read, 0, 1);
+                if (read[0] != 0) return false;
             }
             catch (TimeoutException)
             {

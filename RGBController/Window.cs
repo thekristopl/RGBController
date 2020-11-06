@@ -10,30 +10,20 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using S = RGBController.Properties.Settings;
 
+
 namespace RGBController
 {
     public partial class Window : Form
     {
-        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
+
+        public Window()
         {
-            this.Show();
+            InitializeComponent();
+            this.WindowState = FormWindowState.Minimized;
+            Connection.Connect();
 
-            this.WindowState = FormWindowState.Normal;
-            Brightness.Value = S.Default.Brightness;
-            Speed.Value = S.Default.Speed;
-        }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
 
-            if(e.CloseReason == CloseReason.UserClosing)
-            {
-                this.Hide();
-                this.WindowState = FormWindowState.Normal;
-                notifyIcon.Visible = true;
-                e.Cancel = true;
-            }
 
         }
 
@@ -42,72 +32,68 @@ namespace RGBController
             this.Visible = false;
         }
 
-        public Window()
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            InitializeComponent();
-            this.WindowState = FormWindowState.Minimized;
+            base.OnFormClosing(e);
+            if(e.CloseReason == CloseReason.UserClosing)
+            {
+                this.Hide();
+                this.WindowState = FormWindowState.Normal;
+                notifyIcon.Visible = true;
+                e.Cancel = true;
+            }
+            else Connection.Disconnect();
         }
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private void SettingsButton_Click(object sender, EventArgs e)
+        private void OpenSettings(object sender, EventArgs e)
         {
             Settings settings_form = new Settings();
             settings_form.ShowDialog();
         }
 
-        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        private void CloseUsingNotify(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
 
-        private void Left_Click(object sender, EventArgs e)
+        private void ShowUsingNotify(object sender, MouseEventArgs e)
+        {
+            this.Show();
+
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        /////////////////////////////////////////////////////////////////////////
+
+        private void RGBSetColor(object sender, EventArgs e)
         {
             CollorPicker Picker = new CollorPicker();
 
             if (Picker.ShowDialog() == DialogResult.OK)
             {
-                Color color = Picker.Choice;
-               
-                Arduino.Send("MODE", new List<byte> {0, color.R, color.G, color.B });
+                Connection.RGBSetColor(Picker.Choice);
+                RGBCollor.BackColor = Picker.Choice;
             }
         }
 
-        private void Right_Click(object sender, EventArgs e)
+        private void RGBSetBright(object sender, EventArgs e)
         {
-            CollorPicker Picker = new CollorPicker();
-
-            if (Picker.ShowDialog() == DialogResult.OK)
-            {
-                Color color = Picker.Choice;
-              
-                Arduino.Send("MODE", new List<byte> {1, color.R, color.G, color.B });
-            }
+            Connection.RGBSetBright((byte)RGBBrightness.Value);
         }
 
-
-        private void SingleFade_Click(object sender, EventArgs e)
+        private void LampSetBright(object sender, EventArgs e)
         {
-            Arduino.Send("MODE", new List<byte>{2});
+            Connection.LampSetBright((byte)lampBar.Value);
         }
 
-        private void DoubleFade_Click(object sender, EventArgs e)
+        private void YellowSetBright(object sender, EventArgs e)
         {
-            byte[] options = { 3 };
-            Arduino.Send("MODE", new List<byte> {3});
+            Connection.YellowSetBright((byte)yellowBar.Value);
         }
 
-
-        private void Speed_Scroll(object sender, EventArgs e)
+        private void BlueSetBright(object sender, EventArgs e)
         {
-            S.Default.Speed = Speed.Value;
-            Arduino.Send("SPEE", new List<byte> { (byte)Speed.Value });
-        }
-
-        private void Brightness_Scroll(object sender, EventArgs e)
-        {
-            S.Default.Brightness = Brightness.Value;
-            Arduino.Send("BRIG", new List<byte> { (byte)Brightness.Value });
+            Connection.BlueSetBright((byte)blueBar.Value);
         }
     }
 }
